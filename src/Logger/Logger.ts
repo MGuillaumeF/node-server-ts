@@ -53,8 +53,8 @@ const THEMES = new Map<ELOGGER_LEVEL, LOGGER_THEME>([
     ELOGGER_LEVEL.WARN,
     {
       mainFontColor: 'yellow',
-      tagFontColor: 'white',
-      backColor: 'yellow',
+      tagFontColor: 'black',
+      backColor: 'bgYellow',
       appenderLevel: ELOGGER_LEVEL.WARN,
       style: 'bold',
     },
@@ -63,8 +63,8 @@ const THEMES = new Map<ELOGGER_LEVEL, LOGGER_THEME>([
     ELOGGER_LEVEL.ERROR,
     {
       mainFontColor: 'red',
-      tagFontColor: 'white',
-      backColor: 'red',
+      tagFontColor: 'black',
+      backColor: 'bgRed',
       appenderLevel: ELOGGER_LEVEL.ERROR,
       style: 'bold',
     },
@@ -73,8 +73,8 @@ const THEMES = new Map<ELOGGER_LEVEL, LOGGER_THEME>([
     ELOGGER_LEVEL.FATAL,
     {
       mainFontColor: 'red',
-      tagFontColor: 'white',
-      backColor: 'red',
+      tagFontColor: 'black',
+      backColor: 'bgRed',
       appenderLevel: ELOGGER_LEVEL.ERROR,
       style: 'bold',
     },
@@ -94,7 +94,10 @@ class Logger {
     });
     const tag = Colors[t.tagFontColor](`[${level.toUpperCase()}]`);
     const tagStyled = t.style ? Colors[t.style](tag) : tag;
-    Console[t.appenderLevel](tagStyled, ...traces);
+    const tagBgStyled = t.backColor
+      ? Colors[t.backColor](tagStyled)
+      : tagStyled;
+    Console[t.appenderLevel](tagBgStyled, ...traces);
   }
 
   debug(...messages: string[]) {

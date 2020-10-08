@@ -97,7 +97,11 @@ class Logger {
     const tagBgStyled = t.backColor
       ? Colors[t.backColor](tagStyled)
       : tagStyled;
-    Console[t.appenderLevel](tagBgStyled, ...traces);
+    Console[t.appenderLevel](
+      `[${new Date().toISOString().replace('T', '_').split('.')[0]}]`,
+      tagBgStyled,
+      ...traces
+    );
   }
 
   debug(...messages: any[]) {

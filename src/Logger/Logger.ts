@@ -97,8 +97,17 @@ class Logger {
     Console[t.appenderLevel](tagStyled, ...traces);
   }
 
+  debug(...messages: string[]) {
+    this.trace(ELOGGER_LEVEL.DEBUG, ...messages);
+  }
   info(...messages: string[]) {
     this.trace(ELOGGER_LEVEL.INFO, ...messages);
+  }
+  warn(...messages: string[]) {
+    this.trace(ELOGGER_LEVEL.WARN, ...messages);
+  }
+  error(...messages: string[]) {
+    this.trace(ELOGGER_LEVEL.ERROR, ...messages);
   }
 }
 const LOGGER = new Logger();

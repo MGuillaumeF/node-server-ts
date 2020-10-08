@@ -11,4 +11,7 @@ http
   })
   .listen(DEFAULT_SOCKET);
 
+LOGGER.debug(`Server Listen on socket ${DEFAULT_SOCKET}`);
 LOGGER.info(`Server Listen on socket ${DEFAULT_SOCKET}`);
+LOGGER.warn(`Server Listen on socket ${DEFAULT_SOCKET}`);
+LOGGER.error(`Server Listen on socket ${DEFAULT_SOCKET}`);

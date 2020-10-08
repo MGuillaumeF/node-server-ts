@@ -83,7 +83,7 @@ const THEMES = new Map<ELOGGER_LEVEL, LOGGER_THEME>([
 class Logger {
   constructor() {}
 
-  trace(level: ELOGGER_LEVEL, ...messages: string[]) {
+  trace(level: ELOGGER_LEVEL, ...messages: any[]) {
     const t = THEMES.get(level);
     if (!t) {
       throw Error('Theme not found');
@@ -100,16 +100,16 @@ class Logger {
     Console[t.appenderLevel](tagBgStyled, ...traces);
   }
 
-  debug(...messages: string[]) {
+  debug(...messages: any[]) {
     this.trace(ELOGGER_LEVEL.DEBUG, ...messages);
   }
-  info(...messages: string[]) {
+  info(...messages: any[]) {
     this.trace(ELOGGER_LEVEL.INFO, ...messages);
   }
-  warn(...messages: string[]) {
+  warn(...messages: any[]) {
     this.trace(ELOGGER_LEVEL.WARN, ...messages);
   }
-  error(...messages: string[]) {
+  error(...messages: any[]) {
     this.trace(ELOGGER_LEVEL.ERROR, ...messages);
   }
 }

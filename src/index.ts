@@ -4,10 +4,21 @@ import LOGGER from './Logger/Logger';
 const DEFAULT_SOCKET = 4040;
 
 http
-  .createServer((req: http.IncomingMessage, res: http.ServerResponse) => {
-    LOGGER.info('test');
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('hello');
+  .createServer((r: http.IncomingMessage, s: http.ServerResponse) => {
+	LOGGER.debug(r.method, r.url, r.headers);
+    var body = "";
+    r.on('readable', function() {
+		const text = r.read();
+		if (text != null) {
+			body += text;
+		}	
+    });
+    r.on('end', function() {
+        LOGGER.debug(body);
+		s.writeHead(200, { 'Content-Type': 'text/plain' });
+        s.write("OK"); 
+        s.end(); 
+    });
   })
   .listen(DEFAULT_SOCKET);
 
